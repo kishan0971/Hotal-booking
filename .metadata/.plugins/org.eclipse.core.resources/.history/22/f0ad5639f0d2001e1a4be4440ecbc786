@@ -1,0 +1,5 @@
+package com.jsp.hookup.model;
+
+public class BookRoom {
+
+}

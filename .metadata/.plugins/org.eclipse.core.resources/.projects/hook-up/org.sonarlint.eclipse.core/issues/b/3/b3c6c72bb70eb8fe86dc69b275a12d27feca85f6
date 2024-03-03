@@ -1,0 +1,7 @@
+
+a
+java:S14528"&Remove usage of generic wildcard type.8э ор▐1b d1457b72c3fb323a2671125aef3eab5dh
+a
+java:S1452D"&Remove usage of generic wildcard type.8э ор▐1b d1457b72c3fb323a2671125aef3eab5dh
+Л
+java:S3655V"PCall "Optional#isPresent()" or "!Optional#isEmpty()" before accessing the value.8э ор▐1b 65876b3aa102302354f44f59765f68c2h

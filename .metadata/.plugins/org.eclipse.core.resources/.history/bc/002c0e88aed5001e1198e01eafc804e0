@@ -1,0 +1,50 @@
+package com.jsp.hookup.service;
+
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+
+import com.jsp.hookup.model.BookdRoom;
+import com.jsp.hookup.repository.BookingRepository;
+
+import lombok.RequiredArgsConstructor;
+
+@Service
+@RequiredArgsConstructor
+public class BookingServiceImpl implements BookingService{
+
+//	public List<BookdRoom> getAllBookingsByRoomId(long roomId) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+	private final BookingRepository bookingRepository;
+	
+	@Override
+	public void cancelBooking(Long bookingId) {
+		bookingRepository.deleteById(bookingId);
+	}
+
+	@Override
+	public String saveBooking(Long roomId, BookdRoom bookingRequest) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public BookdRoom findByBookingConfirmationCode(String confirmationCode) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<BookdRoom> getAllBookings() {
+		
+		return bookingRepository.findAll();
+	}
+
+	public List<BookdRoom> getAllBookingsByRoomId(long roomId) {
+		
+		return null;
+	}
+
+}

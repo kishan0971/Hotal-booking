@@ -1,0 +1,9 @@
+
+‹
+java:S3655v"PCall "Optional#isPresent()" or "!Optional#isEmpty()" before accessing the value.8½ªËùÝ1b fb535938c108455a59d82ce8a8d33510h
+£
+java:S1128"hRemove this unused import 'org.springframework.boot.context.config.ConfigDataResourceNotFoundException'.8¶Ç‘ùÝ1b 7aad0ec249ae99e819d8c508c10bccbeh
+Y
+java:S1128"Remove this duplicated import.8Š¸üõÝ1b bb948ee530bfb011afbeb6f168d61c00h
+a
+java:S1168V"&Return an empty array instead of null.8ûÔ­óÝ1b 37a6259cc0c1dae299a7866489dff0bdh

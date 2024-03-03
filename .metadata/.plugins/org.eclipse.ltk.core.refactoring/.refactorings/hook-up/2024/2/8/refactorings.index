@@ -1,0 +1,6 @@
+1708760813912	Rename package 'com.jsp.hookup.service.model'
+1708763987501	Rename type 'BookRoomController'
+1708764010208	Rename type 'BookRoomRepository'
+1708764023400	Rename type 'BookRoomService'
+1708764038690	Rename type 'BookRoomServiceImpl'
+1708765460379	Rename type 'BookedRoomResponse'

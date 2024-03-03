@@ -1,0 +1,5 @@
+package com.jsp.hookup.response;
+
+public class RoomResponse {
+
+}

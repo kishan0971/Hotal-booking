@@ -1,0 +1,9 @@
+package com.jsp.hookup.repository;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.jsp.hookup.model.BookdRoom;
+
+public interface BookingRepository extends JpaRepository<BookdRoom, Long> {
+
+}
