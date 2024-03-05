@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
-import { NavLink } from 'react-bootstrap'
+import { Link, NavLink } from 'react-router-dom'
+
 
 const NavBar = () => {
     const [showAccount,setShowAccount] = useState(false)
@@ -11,10 +11,10 @@ const NavBar = () => {
   return (
     <nav className='navbar navbar-expand-lg bg-body-tertiary px-5 shadow mt-5 sticky-top'>
       <div className='container-fluid'>
-        <Link to={"/"}>
-        <span className='hotel-color'>
-        HookUp Hotel
-        </span>
+        <Link to={"/"} style={{textDecoration: "none"}}>
+            <span className='hotel-color'>
+            HookUp Hotel
+            </span>
         </Link>
         <button 
         className='navbar-toggler'
@@ -50,7 +50,7 @@ const NavBar = () => {
 
                 <li className="nav-item dropdown">
                     <a
-                        // className={`nav-link dropdown-toggle ${showAccount ? "show" : ""}`}
+                        
                         className={`nav-link dropdown-toggle ${showAccount ? "show" : ""}`}
                         href="#"
                         role="button"

@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import {  useNavigate, useParams } from 'react-router-dom';
-import { getRoomById } from '../utils/ApiFunction';
+import { bookRoom, getRoomById } from '../utils/ApiFunction';
 import {Form, FormControl } from 'react-bootstrap';
 import moment from 'moment';
+import BookingSummary from './BookingSummary';
 
 const BookingForm = () => {
   const [isValidated, setIsValidated] = useState(false);
@@ -10,12 +11,12 @@ const BookingForm = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const [roomPrice, setRoomPrice] = useState(false);
   const [booking, setBooking] = useState({
-    guestFullName: "",
+    guestName: "",
     guestEmail: "",
     checkInDate: "",
     checkOutDate: "",
-    numberOfAdults: "",
-    numberOfChildren: "",
+    numberOfAdults: "0",
+    numberOfChildren: "0",
   });
 
   const [roomInfo, setRoomInfo] = useState({
@@ -29,9 +30,7 @@ const BookingForm = () => {
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
-        // setBooking({ ...booking, [name]: value });
-        const formattedValue = e.target.type === 'date' ? moment(value).format('YYYY-MM-DD') : value;
-        setBooking({ ...booking, [name]: formattedValue });
+        setBooking({ ...booking, [name]: value });
         setErrorMessage("");
     };
 
@@ -57,6 +56,8 @@ const BookingForm = () => {
         return diffInDays * price;
     };
 
+    const bookingCharge = calculatedPayment()
+
     const isGuestCountValid = () => {
         const adultCount = parseInt(booking.numberOfAdults);
         const childrenCount = parseInt(booking.numberOfChildren);
@@ -74,6 +75,8 @@ const BookingForm = () => {
           setErrorMessage("");
           return true;
         }
+        
+        
     };
 
     const handleSubmit = (e) => {
@@ -88,21 +91,19 @@ const BookingForm = () => {
         } else {
           setIsSubmitted(true);
         }
-        setIsSubmitted(true);
+        setIsValidated(true);
     };
 
 
     const handleBooking = async () => {
-        try {
-          const cofirmationCode = await bookRoom(roomId, booking);
-          setIsSubmitted(true);
-          navigate("/", { state: { message: cofirmationCode } });
-        } catch (error) {
+      try {
+        const cofirmationCode = await bookRoom(roomId, booking);
+        setIsSubmitted(true);
+        navigate("/booking-success", { state: { message: cofirmationCode } });
+      } catch (error) {
+          
           setErrorMessage(error.message);
-          navigate("/", { state: { error: error.message } });
-
-          // setErrorMessage(error.message);
-          // navigate("/", { state: { error: errorMessage } });
+          navigate("/booking-success", { state: { error: errorMessage } });
         }
     };
 
@@ -124,13 +125,13 @@ const BookingForm = () => {
 
                 <Form noValidate validated={isValidated} onSubmit={handleSubmit}>
                 <Form.Group>
-                  <Form.Label htmlFor="guestFullName">Full Name :</Form.Label>
+                  <Form.Label htmlFor="guestName">Full Name :</Form.Label>
                   <FormControl
                     required
                     type="text"
-                    id="guestFullName"
-                    name="guestFullName"
-                    value={booking.guestFullName}
+                    id="guestName"
+                    name="guestName"
+                    value={booking.guestName}
                     placeholder="Enter your full name"
                     onChange={handleInputChange}
                   />
@@ -144,7 +145,7 @@ const BookingForm = () => {
                   <Form.Label htmlFor="guestEmail">Email :</Form.Label>
                   <FormControl
                     required
-                    type="text"
+                    type="email"
                     id="guestEmail"
                     name="guestEmail"
                     value={booking.guestEmail}
@@ -251,6 +252,17 @@ const BookingForm = () => {
               </Form>
                 
                 </div>
+            </div>
+            <div className='col-md-6'>
+              {isSubmitted && (
+                <BookingSummary 
+                booking={booking}
+                payment={bookingCharge}
+                isFormValid={isValidated}
+                onConfirm={handleBooking}
+                />
+              )}
+                
             </div>
         </div>
     </div>

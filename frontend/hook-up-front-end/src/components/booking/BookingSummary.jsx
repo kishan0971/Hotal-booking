@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import {Button} from 'react-bootstrap'
 
 const BookingSummary = ({booking,payment,isFormValid, onConfirm}) => {
+    
     const checkInDate = moment(booking.checkInDate)
     const checkOutDate = moment(booking.checkOutDate)
     const numberOfDays = checkOutDate.diff(checkInDate, "days")
@@ -39,19 +40,23 @@ const BookingSummary = ({booking,payment,isFormValid, onConfirm}) => {
 
         <div>
             <h5>Number of Guests</h5>
+            <p>
             <strong>
-                Adult{booking.numberOfAdults > 1 ? "s" :""} : {booking.numberOfAdults}
+                Adult{booking.numberOfAdults > 1 ? "s" :""} : {booking.numberOfAdults} &nbsp; 
             </strong>
+            </p>
+            <p>
             <strong>
                 Children : {booking.numberOfChildren} 
             </strong>
+            </p>
         </div>
         {payment > 0 ?(
             <>
             <p>
               Total Payment : <strong>${payment}</strong>  
             </p>
-            {isFormValid && isBookingConfirmed ? (
+            {isFormValid && !isBookingConfirmed ? (
                 <Button
                 variant = 'success' onClick ={handleConfirmBooking}>
                 {isProcessingPayment ? (
@@ -69,6 +74,7 @@ const BookingSummary = ({booking,payment,isFormValid, onConfirm}) => {
                 )}    
                 </Button>
             ) : isBookingConfirmed ?(
+            
                 
                     <div className="d-flex justify-content-center align-item-center">
                         <div className="spinner-border text-primary" role="status">
@@ -82,10 +88,16 @@ const BookingSummary = ({booking,payment,isFormValid, onConfirm}) => {
         </>
         
         ) :(
-            <p className="text-danger">Check-out date must be after check-id date. </p>
+            <p className="text-danger">Check-out date must be after check-in date. or valid </p>
         )}   
     </div>
   );
 }
 
 export default BookingSummary
+
+
+
+
+
+

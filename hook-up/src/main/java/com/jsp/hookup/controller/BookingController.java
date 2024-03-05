@@ -25,7 +25,7 @@ import com.jsp.hookup.service.RoomService;
 
 import lombok.RequiredArgsConstructor;
 
-
+@CrossOrigin(origins = "*")
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/bookings")
@@ -35,7 +35,7 @@ public class BookingController {
 	
 	private final RoomService roomService;
 	
-	@CrossOrigin(origins = "*")
+	
 	@GetMapping("/all-bookings")	
 	public ResponseEntity<List<BookingResponse>> getAllBookings(){
 		List<BookdRoom> bookings = bookingService.getAllBookings();
@@ -52,7 +52,7 @@ public class BookingController {
 	}
 	
 	
-	@CrossOrigin(origins = "*")
+	
 	@GetMapping("/confirmation/{confirmationCode}")
 	public ResponseEntity<?> getBookingByConfimationCode(@PathVariable String confirmationCode){
 		try {
@@ -64,9 +64,10 @@ public class BookingController {
 		}
 	}
 	
-	@CrossOrigin(origins = "*")
+	
 	@PostMapping("/room/{roomId}/booking")
 	public ResponseEntity<?> saveBooking(@PathVariable Long roomId,@RequestBody BookdRoom bookingRequest){
+		
 		try {
 			String confirmationCode = bookingService.saveBooking(roomId, bookingRequest);
 			
@@ -77,7 +78,7 @@ public class BookingController {
 			
 		}
 	}
-	@CrossOrigin(origins = "*")
+	
 	@DeleteMapping("/booking/{bookingId}/delete")
 	public void cancelBooking(@PathVariable Long bookingId) {
 		bookingService.cancelBooking(bookingId);

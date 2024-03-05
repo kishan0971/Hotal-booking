@@ -52,17 +52,23 @@ const EditRoom = () => {
                 setSuccessMessage("Room updated successfully!");
                 const updatedRoomData = await getRoomById(roomId);
                 setNewRoom(updatedRoomData);
-                setImagePreview(updatedRoomData.photo);
+                setImagePreview(`data:image/png;base64,${updatedRoomData.photo}`);
                 setErrorMessage("");
                 
             } else {
+                setSuccessMessage("")
                 setErrorMessage("Error updating room");
                 
             }
         } catch (error) {
             console.error(error);
             setErrorMessage(error.message);
+            setSuccessMessage("")
         }
+        setTimeout(() => {
+            setSuccessMessage("")
+            setErrorMessage("")
+        }, 3000);
     }
 
     return (
@@ -71,6 +77,12 @@ const EditRoom = () => {
                 <div className="row justify-content-center">
                     <div className="col-md-8 col-lg-6">
                         <h2 className="mt-5 mb-2">Update the Room</h2>
+
+                        {successMessage && <div className="alert alert-success">{successMessage}</div>}
+                        {errorMessage && <div className="alert alert-danger">{errorMessage}</div>}
+
+
+
                         <form onSubmit={handleSubmit}>
                             <div className="mb-3">
                                 <label htmlFor="roomType" className="form-label">Room Type</label>

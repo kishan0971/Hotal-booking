@@ -53,6 +53,7 @@ const App = () => {
         </Routes>
       </Router>
       <Footer />
+      
     </main>
       
     </>

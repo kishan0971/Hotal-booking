@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import RoomCard from './RoomCard'
 import { Col, Container, Row } from 'react-bootstrap'
+import RoomFilter from '../common/RoomFilter'
+import RoomPaginator from '../common/RoomPaginator'
+import { getAllRooms } from '../utils/ApiFunction'
 
 const Room = () => {
     const[data,setData] = useState([])
-    const[error,setError] = useState(nul)
+    const[error,setError] = useState(null)
     const[isLoading,setIsLoading] = useState(false)
     const[currentPage,setCurrentPage] = useState(1)
     const[roomPerPage] =useState(6)
